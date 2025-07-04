@@ -1,7 +1,33 @@
 <html>
   <head>
+    <title>
+      Members Only
+    </title>
   </head>
   <body>
+  <% if(user.role){%>
+    <a href=`/{userName}/new`> New Message</a>
+      <ul>
+      <% messages.forEach((message) => { %>
+          <%- include('messages', {text: message.text, userName: message.writerUserName, time: message.time, role: user.role, writerName: message.writerName, messageId: message.id}); %>
+          <% }); %>
+      </ul>
+      <%}else{%>
+        <p>
+          Messages are only available to users that have either a user role or admin role.
+          Please input a key to access your role
+          </p>
+          <form method="POST" acion="/key">
+          <label>
+          Role Key:
+          </label>
+          <input type="text" name="key" placeholder="userKey, adminKey" />
+          <button>
+          Submit Key
+          </button>
+          </form>
+          <%}%>
+          <a href="/log-out">LOG OUT</a>
   </body>
 </html>
 

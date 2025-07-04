@@ -1,0 +1,16 @@
+<%- include("partials/errors.ejs") %>
+<form method="POST" action="/sign-up">
+<label for="email"> Email: </label>
+<input type="email" name="email" placeholder="example@email.com"/>
+<label for="fullname"> Fullname: </label>
+<input type="text" name="fullname" placeholder="Martha?"/>
+<label for="role"> Role: </label>
+<input type="text" name="role" placeholder="user / admin"/>
+<label for="password"> Password: </label>
+<input type="password" name="password" placeholder="supersecretpasword"/>
+<label for="password"> Confirm Password: </label>
+<input type="password" name="passwordConfirm" placeholder="supersecretpasword"/>
+<button>
+Sign Up
+</button>
+</form>
