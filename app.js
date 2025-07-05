@@ -18,6 +18,11 @@ app.use(
 );
 app.set("view engine", "ejs");
 app.use(pSession);
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
 app.use(indexRouter);
 
 const PORT = process.env.HOST || 3000;

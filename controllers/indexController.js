@@ -2,11 +2,12 @@ import { addMessage, getAllMessages } from "../db/queries.js";
 
 const getMessages = async function (req, res) {
   const messages = await getAllMessages();
-  console.log(req.body.user);
-  const user = req.body.user;
+  // TODO: Add a method to use locals.user to pass the role data to the view
+  // console.log(req.body.user);
+  // const user = locals.
   res.render("index", {
     messages: messages,
-    user: user,
+    // user: user,
   });
 };
 
@@ -26,9 +27,10 @@ const createUser = async function (req, res, next) {
 };
 
 const createMessage = async function (req, res) {
+  console.log(res.locals.user.email);
   await addMessage({
-    email: req.body.email,
-    fullname: req.body.fullname,
+    email: res.locals.user.email,
+    fullname: res.locals.user.fullname,
     text: req.body.text,
   });
   res.redirect("/");
@@ -48,7 +50,7 @@ const getLogin = async function (req, res) {
 };
 
 const getNewMessage = async function (req, res) {
-  res.redirect("newMessage");
+  res.render("newMessage");
 };
 
 export {

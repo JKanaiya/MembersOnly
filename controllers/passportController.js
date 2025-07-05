@@ -5,10 +5,6 @@ import bcrypt from "bcryptjs";
 
 const pSession = passport.session();
 
-const customFields = {
-  usernameField: "email",
-};
-
 const logOut = function (req, res, next) {
   req.logout((err) => {
     if (err) {
@@ -19,19 +15,18 @@ const logOut = function (req, res, next) {
 };
 
 passport.use(
-  new LocalStrategy(async (email, password, done) => {
+  new LocalStrategy(async (username, password, done) => {
     try {
       // WARN: Possible error due to email/username renaming
       const { rows } = await db.query("SELECT * FROM users WHERE email = $1", [
-        email,
+        username,
       ]);
-      console.log(rows);
       const user = rows[0];
 
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      const match = bcrypt.compare(password, user.password);
+      const match = await bcrypt.compare(password, user.password);
       if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
@@ -42,7 +37,6 @@ passport.use(
     }
   }),
 );
-
 const loginAuthenticate = passport.authenticate("local", {
   successRedirect: "/",
   // TODO: Add correct routing on failure to auth

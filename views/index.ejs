@@ -5,11 +5,11 @@
     </title>
   </head>
   <body>
-  <% if(user.role){%>
-    <a href=`/{userName}/new`> New Message</a>
+  <% if(locals.user.role){%>
+    <a href="/newMessage"> New Message</a>
       <ul>
       <% messages.forEach((message) => { %>
-          <%- include('messages', {text: message.text, userName: message.writerUserName, time: message.time, role: user.role, writerName: message.writerName, messageId: message.id}); %>
+          <%- include('messages', {text: message.text, userName: message.writerUserName, time: message.time, writerName: message.fullname, messageId: message.id}); %>
           <% }); %>
       </ul>
       <%}else{%>

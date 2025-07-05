@@ -6,6 +6,8 @@ const getAllMessages = async function () {
   return rows;
 };
 
+const getUser = async function () {};
+
 const addMessage = async function (message) {
   await db.query(
     "INSERT INTO messages (email, fullname, text, time) VALUES ($1, $2, $3, $4)",

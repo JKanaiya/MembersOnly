@@ -1,10 +1,11 @@
 <h2> 
-<% user.email %>
+<%= locals.user.fullname %>
 </h2> 
 <%- include("partials/errors.ejs") %>
 <form method="POST" action="/newMessage">
  <label for="text"> Text: </label>
- <textarea id="text" name="text" rows="4" cols="50" placeholder="Your message here"/>
+ <textarea id="text" name="text" rows="4" cols="50" placeholder="Your message here">
+ </textarea>
  <button>
  Submit Message:
  </button>
