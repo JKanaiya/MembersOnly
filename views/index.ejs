@@ -28,7 +28,9 @@
               </button>
               </form>
               <% } %>
+              <% if(locals.user){ %>
               <a class="button new" href="/newMessage"> New Message</a>
+              <% } %>
               <div id="messageContainer">
               <% messages.forEach((message) => { %>
                   <%- include('messages', {text: message.text, userName: message.email, time: message.time.toLocaleDateString("en-CA"), writerName: message.fullname, messageId: message.id}); %>

@@ -12,26 +12,22 @@ const validateUser = [
   body("fullname")
     .trim()
     .isLength({ min: 1, max: 15 })
-    .withMessage(`Full name must be at min 1 and max length of 15 chars`),
+    .withMessage("Full name must be at min 1 and max length of 15 chars"),
   body("email")
     .trim()
     .isEmail()
-    .withMessage(`Email must be formatted properly`),
+    .withMessage("Email must be formatted properly"),
   body("password")
     .trim()
     .isLength({ min: 4 })
-    .withMessage(`Password has a min length of 4 chars`),
+    .withMessage("Password has a min length of 4 chars"),
+  body("role").trim().optional(),
   body("passwordConfirm")
     .trim()
     .custom((val, { req }) => {
-      console.log(val === req.body.password);
       return val === req.body.password;
-      // if (val !== req.body.password) {
-      //   throw new Error("Passwords do not match.");
-      // }
     })
     .withMessage("Passwords do not match"),
-  body("role").trim().optional(),
 ];
 
 const validateMessage = [

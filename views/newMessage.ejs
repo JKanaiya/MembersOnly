@@ -1,13 +1,27 @@
+<html>
+<head>
+<title>
+New Message
+</title>
+<link rel="stylesheet" href="newMessage.css">
+</head>
+<body>
+<h1>
+New Message
+</h1>
 <h2> 
 <%= locals.user.fullname %>
 </h2> 
 <%- include("partials/errors.ejs") %>
+<div id="newMsgForm">
 <form method="POST" action="/newMessage">
  <label for="message"> Text: </label>
  <textarea id="messaage" name="message" rows="4" cols="50" placeholder="Your message here">
  </textarea>
- <button>
- Submit Message:
+ <button class="button">
+ Submit Message
  </button>
 </form>
-
+</div>
+<body>
+</html>
