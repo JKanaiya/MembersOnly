@@ -2,6 +2,6 @@ export const isAuth = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.render("unauth");
+    res.render("index");
   }
 };

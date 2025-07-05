@@ -17,7 +17,6 @@ const logOut = function (req, res, next) {
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      // WARN: Possible error due to email/username renaming
       const { rows } = await db.query("SELECT * FROM users WHERE email = $1", [
         username,
       ]);

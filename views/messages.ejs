@@ -1,17 +1,23 @@
 <li>
+<% if(!locals.user){ %>
+  <p> AnonAuthor
+    </p> 
+    <% }%>
   <p name="messageContent">
     <%= text %>  
   </p>
-  <p name="userName">
-    <%= userName %> 
-  </p>
-  <p name="time">
-    <%= time %> 
-  </p>
-  <% if(locals.user.role == "admin"){ %>
-    <p name="writerName">
-      <%= writerName %> 
+  <% if(locals.user){ %>
+    <p name="userName">
+      <%= userName %> 
       </p>
-      <a href=`/deleteMessage/${messageId}`> Delete Message </a>
-      <% }%>
+      <p name="time">
+      <%= time %> 
+      </p>
+      <% if(locals.user && locals.user.role == "admin"){ %>
+        <p name="writerName">
+          <%= writerName %> 
+          </p>
+          <a href="<%=`/deleteMessage/${messageId}`%>"> Delete Message </a>
+          <% }%>
+          <% }%>
 </li>

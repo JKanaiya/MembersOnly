@@ -5,29 +5,31 @@
     </title>
   </head>
   <body>
-  <% if(locals.user.role){%>
-    <a href="/newMessage"> New Message</a>
-      <ul>
-      <% messages.forEach((message) => { %>
-          <%- include('messages', {text: message.text, userName: message.writerUserName, time: message.time, writerName: message.fullname, messageId: message.id}); %>
-          <% }); %>
-      </ul>
-      <%}else{%>
-        <p>
-          Messages are only available to users that have either a user role or admin role.
-          Please input a key to access your role
-          </p>
-          <form method="POST" acion="/key">
-          <label>
-          Role Key:
-          </label>
-          <input type="text" name="key" placeholder="userKey, adminKey" />
-          <button>
-          Submit Key
-          </button>
-          </form>
-          <%}%>
-          <a href="/log-out">LOG OUT</a>
+  <% if(!locals.user){%>
+    <%- include ("partials/unauth.ejs")%>
+      <%}%>
+      <br/>
+        <a href="/newMessage"> New Message</a>
+          <% if(locals.user && !locals.user.role){ %>
+            <p>
+              Message details are only available to users that have either a user role or admin role.
+              Please input a key to access your role
+              </p>
+              <form action="/key" method="POST">
+              <label>
+              Role Key:
+              </label>
+              <input type="text" name="key" placeholder="userKey, adminKey" />
+              <button>
+              Submit Key
+              </button>
+              </form>
+              <% } %>
+              <ul>
+              <% messages.forEach((message) => { %>
+                  <%- include('messages', {text: message.text, userName: message.email, time: message.time, writerName: message.fullname, messageId: message.id}); %>
+                  <%});%>
+              </ul>
+              <a href="/log-out">LOG OUT</a>
   </body>
 </html>
-
