@@ -3,13 +3,16 @@
     <title>
       Members Only
     </title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+  <h1>
+    Members Only
+  </h1>
   <% if(!locals.user){%>
     <%- include ("partials/unauth.ejs")%>
       <%}%>
       <br/>
-        <a href="/newMessage"> New Message</a>
           <% if(locals.user && !locals.user.role){ %>
             <p>
               Message details are only available to users that have either a user role or admin role.
@@ -25,11 +28,12 @@
               </button>
               </form>
               <% } %>
-              <ul>
+              <a class="button new" href="/newMessage"> New Message</a>
+              <div id="messageContainer">
               <% messages.forEach((message) => { %>
-                  <%- include('messages', {text: message.text, userName: message.email, time: message.time, writerName: message.fullname, messageId: message.id}); %>
+                  <%- include('messages', {text: message.text, userName: message.email, time: message.time.toLocaleDateString("en-CA"), writerName: message.fullname, messageId: message.id}); %>
                   <%});%>
-              </ul>
-              <a href="/log-out">LOG OUT</a>
+              </div>
+              <a class="button logout" href="/log-out">LOG OUT</a>
   </body>
 </html>
